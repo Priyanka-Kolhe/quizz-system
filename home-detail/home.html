@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | Quizz</title>
+    <title>Home | Quiz!</title>
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
@@ -35,7 +35,9 @@
       </main>
 
       <section>
+         <h2>About me</h2>
          <div class="about">
+             
                 <div class="about-part1">
                   <h1>About</h1>
                   <p>Welcome to QuizApp, the ultimate platform to test your knowledge 
@@ -82,5 +84,44 @@
 
          </div>  
       </section>
+      <section class="contact-section">
+         <!-- Person 1 (Top) -->
+         <div class="contact-card">
+             <img src="img/person1.jpg" alt="Person 1">
+             <h3>Priyanka Kolhe</h3>
+             <p>TYBCS</p>
+             <p>Email: <a href="mailto:pkolhe657@gmail.com">pkolhe657@gmail.com</a></p>
+             <div class="social-links">
+                 <a href="https://linkedin.com/in/johndoe" target="_blank">LinkedIn</a>
+                 <a href="https://instagram.com/johndoe" target="_blank">Instagram</a>
+             </div>
+         </div>
+         <div class="contact-card">
+            <img src="img/person2.jpg" alt="Person 2">
+            <h3>Vrushali Bhangude</h3>
+            <p>TYBCS</p>
+            <p>Email: <a href="mailto:vrushalibhangude2@gmail.com">vrushalibhangude2@gmail.com</a></p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/janesmith" target="_blank">LinkedIn</a>
+                <a href="https://instagram.com/janesmith" target="_blank">Instagram</a>
+            </div>
+        </div>
+     
+         <!-- Contact Form -->
+         <div class="contact-form">
+             <h2>Contact Us</h2>
+             <form action="contact.php" method="POST">
+                 <input type="text" name="name" placeholder="Your Name" required>
+                 <input type="email" name="email" placeholder="Your Email" required>
+                 <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                 <button type="submit">Send Message</button>
+             </form>
+         </div>
+     
+         <!-- Person 2 (Below) -->
+         
+     </section>
+     
+     
 </body>
 </html>
