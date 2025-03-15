@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Body with Background Pattern and Animated Shadow */
+body {
+    background-color: rgb(7, 3, 44); /* Base color */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the size of the grid pattern */
+    overflow-y: scroll;
+    scrollbar-width: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    animation: glow 5s infinite alternate ease-in-out;
+}
+
+/* Glow Animation */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 0 0 40px rgba(255, 255, 255, 0.1), 0 0 60px rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.3), 0 0 90px rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-weight: 500;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2); 
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2); 
+    color: black;
+}
+
+#message {
+    margin-top: 15px;
+    color: #ff4d4d;
+    font-weight: 500;
+}

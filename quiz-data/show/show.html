@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="show.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1 id="quizTitle"></h1>
+        <p id="quizDescription"></p>
+        <div id="questionContainer">
+            <h2 id="questionText"></h2>
+            <ul id="optionsList"></ul>
+            <div id="timer">Time Left: <span id="time">40</span> seconds</div>
+            <button id="nextQuestionBtn">Next Question</button>
+        </div>
+        <div id="resultContainer" class="hidden">
+            <h2>Quiz Completed!</h2>
+            <p>Your Score: <span id="score">0</span> / <span id="totalQuestions">0</span></p>
+        </div>
+    </div>
+
+    <script src="show.js"></script>
+</body>
+</html>

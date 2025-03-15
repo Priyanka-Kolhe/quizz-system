@@ -1,0 +1,741 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+html, body {
+    height: 100%; 
+    margin: 0;
+    padding: 0;
+    overflow: hidden; 
+}
+
+body {
+    position: relative;
+    background-color: rgb(7, 3, 44); 
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px; 
+    overflow-y: auto;
+
+}
+
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(7, 3, 44, 0.5); 
+    backdrop-filter: blur(10px); 
+    z-index: -1; 
+}
+
+
+body::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(-45deg, rgb(27, 8, 63), white, #ee32c5, white, #e73c7e, white, #23a6d5, white, #23d5ab, rgb(14, 176, 240));   
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: -2; /* Ensures it sits behind the overlay */
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+header {
+    width: 100%;
+    position: fixed;
+    background-color: rgba(7, 3, 44, 0.9); 
+    z-index: 999;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+nav .part1 img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.hamburger {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+nav .part2 ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+nav .part2 li a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9em;
+    opacity: 0.7;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+nav .part2 li a:hover {
+    background-color: rgba(245, 245, 245, 0.829);
+    border-radius: 8px;
+    color: black;
+    opacity: 1;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .part2 {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: -2px 2px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .part2 ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .part2.active {
+        display: flex;
+    }
+}
+
+/* Create Quiz Container */
+.create-quiz-container {
+    padding: 100px 10% 50px;
+    color: white;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1; 
+    text-decoration: none;
+}
+/* Quiz ID Styling */
+.quiz-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.quiz-card h3:first-child {
+    color: #ff6eb4; /* Highlight Quiz ID */
+    font-weight: bold;
+}
+
+/* Hidden Content */
+.hidden {
+    display: none;
+}
+
+.create-quiz-container h1 {
+    font-size: 42px;
+    background: linear-gradient(45deg, #ff6eb4, #9323c4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Form Styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Question Styling */
+.question {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.removeQuestion {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.removeQuestion:hover {
+    background: #e60000;
+}
+
+/* Add Question Button */
+#addQuestion {
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+#addQuestion:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2);
+}
+
+/* Submit Button */
+.submit-btn {
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2);
+}
+
+/* Dropdown Styling */
+.dropdown {
+    position: relative;
+    
+}
+
+.dropdown .dropdown-content {
+   display: none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: rgba(7, 3, 44, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+    z-index: 1000;
+    cursor: pointer;
+    padding: 10px 0;
+    color: white;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.8;
+    transition: 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Added Quizzes Tab Styling */
+#addedQuizzesTab {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#quizDetailsContent {
+    padding: 20px;
+    background: whit;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.quiz-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quiz-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.quiz-card p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 10px;
+}
+
+.quiz-card button {
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.quiz-card button:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2);
+}
+
+/* Responsive Dropdown */
+@media screen and (max-width: 768px) {
+    .dropdown-content {
+        position: static;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+    }
+
+    .dropdown-content a {
+        padding: 10px 0;
+    }
+}
+
+/* Quiz ID Styling in Dropdown */
+.quizId {
+    font-weight: bold;
+    color: #ff6eb4; /* Highlight Quiz ID */
+    margin-right: 5px;
+}
+
+.quizItem {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.quizItem:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+/* Remove Quiz Button Styling */
+.remove-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.remove-btn:hover {
+    background: #e60000;
+}
+
+/* Styling for Questions and Options */
+.question {
+    margin-bottom: 20px;
+}
+
+.question h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.question ul {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.question ul li {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 5px;
+}
+
+/* Home Content Styling */
+#homeContent {
+    text-align: center;
+    padding: 20px;
+}
+
+#homeContent h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #ff6eb4, #9323c4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+#homeContent p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+/* Features Section */
+.features {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.features h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.features ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.features li {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Call-to-Action Buttons */
+.cta-buttons {
+    margin: 20px 0;
+}
+
+.cta-btn {
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+    transition: background 0.3s ease;
+}
+
+.cta-btn:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2);
+}
+
+/* Statistics Section */
+.statistics {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.statistics h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.statistics p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Motivational Quote */
+.quote {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.quote blockquote {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    font-style: italic;
+    border-left: 4px solid #ff6eb4;
+    padding-left: 15px;
+}
+/* Hamburger Menu */
+.hamburger {
+    display: none; /* Hidden by default */
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.hamburger-icon,
+.cross-icon {
+    transition: opacity 0.3s ease;
+}
+
+.cross-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.hamburger-icon.hidden,
+.cross-icon.hidden {
+    opacity: 0;
+}
+
+.hamburger-icon:not(.hidden),
+.cross-icon:not(.hidden) {
+    opacity: 1;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show hamburger on small screens */
+    }
+
+    .part2 {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: -2px 2px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .part2.active {
+        display: flex; /* Show nav when active */
+    }
+
+    .part2 ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* Navigation Bar */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 5%;
+    background-color: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.part1 img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.part2 ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.part2 li a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9em;
+    opacity: 0.7;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.part2 li a:hover {
+    background-color: rgba(245, 245, 245, 0.829);
+    border-radius: 8px;
+    color: black;
+    opacity: 1;
+}
+
+/* Dropdown Menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(7, 3, 44, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    z-index: 1000;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.8;
+    transition: 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 1;
+    border-radius: 4px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none; /* Hidden by default */
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+
+.hamburger-icon,
+.cross-icon {
+    transition: opacity 0.3s ease;
+}
+
+.cross-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.hamburger-icon.hidden,
+.cross-icon.hidden {
+    opacity: 0;
+}
+
+.hamburger-icon:not(.hidden),
+.cross-icon:not(.hidden) {
+    opacity: 1;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block; /* Show hamburger on small screens */
+    }
+
+    .part2 {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: -2px 2px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .part2.active {
+        display: flex; /* Show nav when active */
+    }
+
+    .part2 ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+}

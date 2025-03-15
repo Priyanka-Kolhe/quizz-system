@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="shortcut icon" type="png" href="images/icon/favicon.png">
+	<title>Login | SignUp</title>
+	<link rel="stylesheet" href="login-register.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- It will redirect to the Home Page after submitting the form -->
+	<script>
+		$(document).ready(function () {
+			$("form").submit(function () {
+				alert("Great Job !");
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<div class="form-box">
+		<div class="button-box">
+			<div id="btn"></div>
+			<button type="button" class="toggle-btn" id="log" onclick="login()" style="color: #fff;">Log In</button>
+			<button type="button" class="toggle-btn" id="reg" onclick="register()">Register</button>
+		</div>
+		<div class="social-icons">
+			<a href="#"><i class="fa-brands fa-square-facebook"></i></i></a>
+			<a href="#"><i class="fa-brands fa-square-instagram"></i></a>
+			<a href="#"><i class="fa-brands fa-square-twitter"></i></a>
+		</div>
+
+		<!-- Login Form -->
+		<form id="login" class="input-group" action="index.html">
+			<div class="inp">
+				<i class="fa-solid fa-user"></i><input type="text" id="email" class="input-field"
+					placeholder="Username or Phone Number" style="width: 88%; border:none;" required="required">
+			</div>
+			<div class="inp">
+				<i class="fa-solid fa-lock"></i><input type="password" id="password" class="input-field"
+					placeholder="Password" style="width: 88%; border: none;" required="required">
+			</div>
+			<input type="checkbox" class="check-box">Remember Password
+			<button type="submit" class="submit-btn">Log In</button>
+		</form>
+
+
+		<div class="other" id="other">
+			<div class="instead">
+				<h3>or</h3>
+			</div>
+			<button class="connect" onclick="google()">
+				<img src="/img/icon/google.png"><span>Sign in with Google</span>
+			</button>
+		</div>
+
+		<!-- Registration Form -->
+		<form id="register" class="input-group">
+			<input type="text" class="input-field" placeholder="Full Name" required>
+			<input type="email" class="input-field" placeholder="Email Address" required>
+			<input type="text" class="input-field" placeholder="Mobile Number" pattern="[0-9]{10}"
+				title="Enter a valid 10-digit mobile number" required>
+			<input type="text" class="input-field" placeholder="Address" required>
+
+			<select class="input-field" required>
+				<option value="" disabled selected>Gender</option>
+				<option value="Male">Male</option>
+				<option value="Female">Female</option>
+				<option value="Other">Other</option>
+			</select>
+
+			<input type="date" class="input-field" placeholder="Date of Birth" required>
+
+			<input type="password" class="input-field" id="password" placeholder="Create Password" required>
+			<input type="password" class="input-field" id="confirm_password" placeholder="Confirm Password" required>
+			
+
+			<input type="checkbox" class="check-box" id="chkAgree">I agree to the Terms & Conditions
+			<button type="submit" id="btnSubmit" class="submit-btn reg-btn">Register</button>
+		</form>
+
+	</div>
+
+	<script src="login-register.js"></script>
+</body>
+
+</html>
