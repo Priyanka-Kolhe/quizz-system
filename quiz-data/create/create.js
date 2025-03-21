@@ -22,10 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Tab navigation
     homeTab.addEventListener("click", event => { event.preventDefault(); showContent(homeContent); });
     addQuizTab.addEventListener("click", event => { event.preventDefault(); showContent(addQuizContent); });
-    addedQuizzesTab.addEventListener("click", event => { 
-        event.preventDefault(); 
-        showContent(quizDetailsContent); 
-        toggleDropdown(); // Toggle dropdown visibility
+    addedQuizzesTab.addEventListener("click", event => {
+        event.preventDefault();
+        showContent(quizDetailsContent);
+        toggleDropdown();
     });
 
     // Toggle dropdown visibility
@@ -48,10 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Save quiz to localStorage
     function saveQuiz(quiz) {
         let quizzes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
-        if (!quizzes.some(q => q.id === quiz.id)) {
-            quizzes.push(quiz);
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(quizzes));
-        }
+        quizzes.push(quiz);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(quizzes));
     }
 
     // Add a new question
@@ -61,9 +59,17 @@ document.addEventListener("DOMContentLoaded", function () {
         questionDiv.innerHTML = `
             <input type="text" class="questionInput" placeholder="Enter question" required>
             <div class="options">
-                ${Array(4).fill().map((_, i) => `<input type="text" class="optionInput" placeholder="Option ${i + 1}" required>`).join('')}
+                ${Array(4).fill().map((_, i) => `
+                    <input type="text" class="optionInput" placeholder="Option ${i + 1}" required>
+                `).join('')}
+                <label for="correctOption">Correct Option:</label>
+                <select class="correctOption">
+                    ${Array(4).fill().map((_, i) => `
+                        <option value="${i}">Option ${i + 1}</option>
+                    `).join('')}
+                </select>
             </div>
-            <button type="button" class="removeQuestion">Remove</button>
+            <button type="button" class="removeQuestion">Remove Question</button>
         `;
         questionsContainer.appendChild(questionDiv);
     });
@@ -78,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Handle form submission
     createQuizForm.addEventListener('submit', function (e) {
         e.preventDefault();
+
         const quizTitle = document.getElementById('quizTitle').value.trim();
         const quizDescription = document.getElementById('quizDescription').value.trim();
         const questionElements = document.querySelectorAll('.question');
@@ -90,7 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let questions = Array.from(questionElements).map(question => {
             return {
                 question: question.querySelector('.questionInput').value.trim(),
-                options: Array.from(question.querySelectorAll('.optionInput')).map(opt => opt.value.trim())
+                options: Array.from(question.querySelectorAll('.optionInput')).map(opt => opt.value.trim()),
+                correctOption: parseInt(question.querySelector('.correctOption').value) // Store correct option index
             };
         });
 
@@ -118,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
         quizDropdown.innerHTML = quizzes.map(quiz => `
             <div class='quizItem' data-id='${quiz.id}'>
                 <span class='quizId'>${quiz.id}</span> - ${quiz.title}
+                <button class='editQuizBtn'>Edit</button>
             </div>
         `).join('');
     }
@@ -173,82 +182,87 @@ document.addEventListener("DOMContentLoaded", function () {
     // Load existing quizzes into the dropdown when the page loads
     addQuizToDropdown();
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const LOCAL_STORAGE_KEY = 'quizzes';
+    const questionsContainer = document.getElementById('questionsContainer');
+    const createQuizForm = document.getElementById('createQuizForm');
 
-// Update total quizzes created
-function updateTotalQuizzes() {
-    const quizzes = JSON.parse(localStorage.getItem('quizzes')) || [];
-    document.getElementById('totalQuizzes').textContent = quizzes.length;
-}
-
-// Call-to-Action Button Functionality
-document.getElementById('createQuizCta').addEventListener('click', function () {
-    showContent(addQuizContent);
-});
-
-document.getElementById('exploreQuizzesCta').addEventListener('click', function () {
-    showContent(quizDetailsContent);
-    toggleDropdown();
-});
-
-// Update statistics when the page loads
-updateTotalQuizzes();
-
-// Function to toggle the menu and icons
-function toggleMenu() {
-    const part2 = document.querySelector('.part2');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
-    const crossIcon = document.querySelector('.cross-icon');
-
-    // Toggle menu visibility
-    part2.classList.toggle('active');
-
-    // Toggle icons
-    hamburgerIcon.classList.toggle('hidden');
-    crossIcon.classList.toggle('hidden');
-}
-
-// Function to toggle the menu and icons
-function toggleMenu() {
-    const part2 = document.querySelector('.part2');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
-    const crossIcon = document.querySelector('.cross-icon');
-
-    // Toggle menu visibility
-    part2.classList.toggle('active');
-
-    // Toggle icons
-    hamburgerIcon.classList.toggle('hidden');
-    crossIcon.classList.toggle('hidden');
-}
-
-// Function to close the menu and reset icons
-function closeMenu() {
-    const part2 = document.querySelector('.part2');
-    const hamburgerIcon = document.querySelector('.hamburger-icon');
-    const crossIcon = document.querySelector('.cross-icon');
-
-    // Close the menu
-    part2.classList.remove('active');
-
-    // Reset icons
-    hamburgerIcon.classList.remove('hidden');
-    crossIcon.classList.add('hidden');
-}
-
-// Add event listeners to all nav links
-const navLinks = document.querySelectorAll('.part2 a');
-navLinks.forEach(link => {
-    link.addEventListener('click', function () {
-        closeMenu(); // Close the menu when a link is clicked
+    // Add a new question
+    document.getElementById('addQuestion').addEventListener('click', function () {
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `
+            <input type="text" class="questionInput" placeholder="Enter question" required>
+            <div class="options">
+                ${Array(4).fill().map((_, i) => `
+                    <input type="text" class="optionInput" placeholder="Option ${i + 1}" required>
+                `).join('')}
+                <label for="correctOption">Correct Option:</label>
+                <select class="correctOption">
+                    ${Array(4).fill().map((_, i) => `
+                        <option value="${i}">Option ${i + 1}</option>
+                    `).join('')}
+                </select>
+            </div>
+            <button type="button" class="removeQuestion">Remove Question</button>
+        `;
+        questionsContainer.appendChild(questionDiv);
     });
-});
 
-// Close menu when clicking outside
-document.addEventListener('click', function (e) {
-    const part2 = document.querySelector('.part2');
-    const hamburger = document.querySelector('.hamburger');
+    // Remove a question
+    questionsContainer.addEventListener('click', function (e) {
+        if (e.target.classList.contains('removeQuestion')) {
+            e.target.closest('.question').remove();
+        }
+    });
 
-    if (!part2.contains(e.target) && !hamburger.contains(e.target)) {
-        closeMenu(); // Close the menu when clicking outside
+    // Handle form submission
+    createQuizForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const quizTitle = document.getElementById('quizTitle').value.trim();
+        const quizDescription = document.getElementById('quizDescription').value.trim();
+        const questionElements = document.querySelectorAll('.question');
+
+        if (!quizTitle || !quizDescription || questionElements.length === 0) {
+            alert("Please enter a title, description, and at least one question.");
+            return;
+        }
+
+        let questions = Array.from(questionElements).map(question => {
+            return {
+                question: question.querySelector('.questionInput').value.trim(),
+                options: Array.from(question.querySelectorAll('.optionInput')).map(opt => opt.value.trim()),
+                correctOption: parseInt(question.querySelector('.correctOption').value) // Store correct option index
+            };
+        });
+
+        if (questions.some(q => !q.question || q.options.some(opt => opt === ""))) {
+            alert("All questions and options must be filled.");
+            return;
+        }
+
+        const quizId = generateQuizId(); // Generate a unique quiz ID
+        const quiz = { id: quizId, title: quizTitle, description: quizDescription, questions };
+        saveQuiz(quiz); // Save quiz to localStorage
+
+        // Reset the form
+        createQuizForm.reset();
+        questionsContainer.innerHTML = '';
+
+        alert("Quiz created successfully!");
+        showContent(homeContent); // Return to the home screen
+    });
+
+    // Generate a unique quiz ID
+    function generateQuizId() {
+        return 'quiz-' + Math.random().toString(36).substr(2, 9);
+    }
+
+    // Save quiz to localStorage
+    function saveQuiz(quiz) {
+        let quizzes = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)) || [];
+        quizzes.push(quiz);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(quizzes));
     }
 });

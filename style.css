@@ -1,3 +1,25 @@
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    font-family: Arial, sans-serif;
+    z-index: 9999;
+}
+
+/* Hide content initially */
+.content {
+    display: none;
+}
+
 /* Body Styling */
 body {
     background-color: rgb(7, 3, 44); /* Base color */
@@ -61,6 +83,7 @@ body {
 .join-container button:hover {
     background: linear-gradient(45deg, #ff6eb4, #7b1fa2);
 }
+
 /* Create Your Own Quiz Button */
 .create-quiz-button {
     position: absolute;
