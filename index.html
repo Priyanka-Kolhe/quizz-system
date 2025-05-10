@@ -3,10 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizz System</title>
+    <title>Quiz!</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-     <a href="./home/home.html"> Go to home page</a>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">Loading...</div>
+    
+    <!-- Main Content -->
+    <div class="content" id="content">
+        <!-- Create Your Own Quiz Button -->
+        <div class="create-quiz-button">
+            <a href="./home-detail/home.html">Create Your Own Quiz</a>
+        </div>
+
+        <!-- Join Quiz Container -->
+        <div class="join-container">
+            <!-- <h1>Join Quiz</h1>
+            <input type="text" id="quizId" placeholder="Enter Quiz ID" required>
+            <input type="text" id="nickname" placeholder="Enter Your Nickname" required> -->
+            <button id="joinQuizBtn"><a href="./quiz-data/join/join.html">Join Quiz</a></button>
+        </div>
+    </div>
+
+    <script>
+        // Show loading screen for 5 seconds
+        setTimeout(() => {
+            document.getElementById('loadingScreen').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+        }, 1000);
+
+        // Handle Join Quiz button click
+        document.getElementById('joinQuizBtn').addEventListener('click', function () {
+            const quizId = document.getElementById('quizId').value.trim();
+            const nickname = document.getElementById('nickname').value.trim();
+
+            if (!quizId || !nickname) {
+                alert("Please enter both Quiz ID and Nickname.");
+                return;
+            }
+
+            alert(`Joining Quiz: ${quizId} as ${nickname}`);
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,444 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Body with Background Pattern */
+body {
+    background-color: rgb(7, 3, 44); /* Base color */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust the size of the grid pattern */
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    width: 100%;
+    position: fixed;
+    background-color: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+    z-index: 999;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+}
+
+nav .part1 img {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+
+.hamburger {
+    font-size: 28px;
+    color: white;
+    cursor: pointer;
+    display: none;
+}
+
+nav .part2 ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+nav .part2 li a {
+    text-decoration: none;
+    color: white;
+    font-size: 0.9em;
+    opacity: 0.7;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+nav .part2 li a:hover {
+    background-color: rgba(245, 245, 245, 0.829);
+    border-radius: 8px;
+    color: black;
+    opacity: 1;
+}
+
+/* Create Your Own Quiz Button */
+.create-quiz-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.create-quiz-button a {
+    display: inline-block;
+    padding: 10px 20px;
+    background: linear-gradient(45deg, #23a6d5, #23d5ab);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+.create-quiz-button a:hover {
+    background: linear-gradient(45deg, #1e90ff, #00ced1);
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .part2 {
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        background: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+        display: none;
+        flex-direction: column;
+        padding: 20px;
+        box-shadow: -2px 2px 10px rgba(255, 255, 255, 0.2);
+    }
+
+    .part2 ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .part2.active {
+        display: flex;
+    }
+}
+
+/* Main Section */
+.main-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container .sub-container {
+    height: 300px;
+    width: 300px;
+    position: relative;
+    animation: rotate360 5s linear infinite;
+}
+
+.main-container .sub-container div {
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(7, 3, 44, 0.8);
+    box-shadow: 
+        15px 10px 20px rgba(255, 255, 255, 0.2),   
+        -14px -10px 20px rgba(255, 255, 255, 0.2),  
+        -10px 20px 20px rgba(240, 35, 172, 0.2),  
+        20px -10px 30px rgba(39, 245, 101, 0.2),
+        -14px -10px 20px rgba(255, 255, 255, 0.2),
+        10px -15px 20px rgba(231, 55, 11, 0.2);
+}
+
+/* Inner quizz box */
+.main-container .sub-container .quizz {
+    height: 200px;
+    width: 200px;
+    background-color: rgba(7, 3, 44, 0.8);
+    position: fixed;  /* Keeps it in place while parent rotates */
+    top: 50%;
+    left: 50%;
+    font-size: 32px;
+    letter-spacing: 5px;
+    transform: translate(-50%, -50%);
+    animation: none; /* Disable rotation for .quizz */
+}
+
+.main-container .sub-container .b1 {
+    height: 100px;
+    width: 100px;
+    background-color: rgba(7, 3, 44, 0.8);
+    position: fixed;  /* Keeps it in place while parent rotates */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes rotate360 {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Sections */
+section {
+    background-color: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+    color: white;
+    padding: 50px 10%;
+    text-align: center;
+    width: 100%;
+}
+
+/* Apply gradient text to all heading tags */
+h1, h2, h3, h4, h5, h6 {
+    background: linear-gradient(45deg, #ff6eb4, #9323c4);
+    -webkit-background-clip: text; /* For Safari/Chrome */
+    background-clip: text;
+    color: transparent; /* Makes the text transparent so the gradient shows through */
+    font-weight: bold;
+}
+
+#about h2 {
+    font-size: 42px;
+}
+
+.about > div {
+    flex: 1 1 100%;
+    background: rgba(7, 3, 44, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 20px 0;
+}
+
+.about > div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 5px rgba(202, 197, 201, 0.5);
+}
+
+.about div h1 {
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.about div p {
+    font-size: 18px;
+    line-height: 1.5;
+    opacity: 0.5;
+}
+
+.about div ul {
+    list-style: none;
+    padding: 0;
+    opacity: 0.5;
+}
+
+.about div li {
+    font-size: 18px;
+    margin: 10px 0;
+    text-align: left;
+    padding-left: 20px;
+    position: relative;
+}
+
+.about div li::before {
+    content: "✔";
+    color: rgba(245, 245, 245, 0.8);
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+b {
+    color: rgba(233, 30, 99, 0.8);
+}
+
+/* Responsive About Section */
+@media (max-width: 768px) {
+    .about {
+        flex-direction: column;
+    }
+    .about > div {
+        width: 100%;
+    }
+}
+
+/* Contact Section */
+.contact-section {
+    background-color: rgba(7, 3, 44, 0.9); /* Slightly transparent */
+    color: white;
+    padding: 50px 10%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-section h1{
+    font-size: 42px;
+}
+.contact-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Contact Card */
+.contact-card {
+    background: rgba(7, 3, 44, 0.8);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 5px rgba(245, 245, 245, 0.8);
+}
+
+.contact-section h1 {
+    font-size: 42px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.contact-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-card h3 {
+    font-size: 22px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.contact-card p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.contact-card p a {
+    color: rgba(233, 30, 99, 0.8);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-card p a:hover {
+    text-decoration: underline;
+}
+
+.contact-card .social-links {
+    margin-top: 10px;
+}
+
+.contact-card .social-links a {
+    color: rgba(128, 128, 128, 0.8);
+    text-decoration: none;
+    margin: 8px;
+    display: inline-block;
+    font-size: 18px;
+    transition: color 0.3s ease;
+}
+
+.contact-card .social-links a:hover {
+    color: rgba(167, 157, 160, 0.8);
+}
+
+/* Contact Form */
+.contact-form {
+    max-width: 500px;
+    width: 100%;
+    margin-top: 30px;
+    padding: 30px;
+    background: rgba(7, 3, 44, 0.8);
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(245, 245, 245, 0.2);
+    text-align: center;
+}
+
+.contact-form h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid rgba(68, 68, 68, 0.5);
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 16px;
+}
+
+.contact-form button {
+    background: linear-gradient(45deg, #ff7eb9, #8a2be2); 
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background: linear-gradient(45deg, #ff6eb4, #7b1fa2); 
+    color: black;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .contact-card {
+        max-width: 90%;
+    }
+    .contact-form {
+        max-width: 90%;
+        padding: 25px;
+    }
+}

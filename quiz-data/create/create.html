@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Quiz</title>
+    <link rel="stylesheet" href="create.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="part1">
+                <!-- <img src="logo.png" alt="Logo"> -->
+            </div>
+            <div class="part2">
+                <ul>
+                    <li><a href="../../home-detail/home.html" id="homeTab"></a></li>
+                    <li><a href="../../home-detail/home.html">Home</a></li>
+                    <li><a href="#" id="addQuizTab">Add Quiz</a></li>
+                    <li class="dropdown">
+                        <a href="#" id="addedQuizzesTab">Added Quizzes</a>
+                        <ul id="quizDropdown" class="dropdown-content"></ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span class="hamburger-icon">&#9776;</span>
+                <span class="cross-icon hidden">&#10005;</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="create-quiz-container">
+        <!-- Home Content -->
+        <div id="homeContent">
+            <h1>Welcome to Quiz App</h1>
+            <p>Create and manage quizzes easily!</p>
+
+            <!-- Features Section -->
+            <div class="features">
+                <h2>Why Choose Quiz App?</h2>
+                <ul>
+                    <li>📝 Create quizzes with unlimited questions and options.</li>
+                    <li>📂 Save and manage all your quizzes in one place.</li>
+                    <li>🚀 Easy-to-use interface for seamless quiz creation.</li>
+                    <li>📊 Track and review your quizzes anytime.</li>
+                </ul>
+            </div>
+
+            <!-- Call-to-Action Buttons -->
+            <div class="cta-buttons">
+                <button id="createQuizCta" class="cta-btn">Create a New Quiz</button>
+                <button id="exploreQuizzesCta" class="cta-btn">Explore Added Quizzes</button>
+            </div>
+
+            <!-- Motivational Quote -->
+            <div class="quote">
+                <blockquote>
+                    "Learning is a treasure that will follow its owner everywhere."
+                </blockquote>
+            </div>
+        </div>
+
+        <!-- Add Quiz Content -->
+        <div id="addQuizContent" class="hidden">
+            <h1>Create a New Quiz</h1>
+            <form id="createQuizForm">
+                <input type="hidden" id="quizId" name="quizId">
+
+                <!-- Quiz Title -->
+                <div class="form-group">
+                    <label for="quizTitle">Quiz Title</label>
+                    <input type="text" id="quizTitle" name="quizTitle" placeholder="Enter quiz title" required>
+                </div>
+
+                <!-- Quiz Description -->
+                <div class="form-group">
+                    <label for="quizDescription">Quiz Description</label>
+                    <textarea id="quizDescription" name="quizDescription" placeholder="Enter quiz description" rows="4" required></textarea>
+                </div>
+
+                <!-- Add Questions -->
+                <div class="form-group">
+                    <label>Add Questions</label>
+                    <div id="questionsContainer">
+                        <!-- Questions will be dynamically added here -->
+                    </div>
+                    <button type="button" id="addQuestion">Add Question</button>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Create Quiz</button>
+            </form>
+        </div>
+
+        <!-- Quiz Details Content -->
+        <div id="quizDetailsContent" class="hidden">
+            <h1>Quiz Details</h1>
+            <div id="quizDetails"></div>
+        </div>
+    </main>
+
+    <script src="create.js"></script>
+</body>
+</html>
